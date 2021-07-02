@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+s
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -27,8 +27,10 @@
                                 <div class="col">
                                     <h1 class="text-primary">Title: {{$post->title}}</h1>
                                     <h3 class="text-secondary">Content: {{$post->content}}</h3>
-                                </div>
+                                    <h5> Author: {{ $post->user->name }}</h5>
+                                    <p>{{ $post->category ? $post->category->name : 'none' }}</p>
 
+                            </div>
 
                                 @auth
                                 <div class="col row d-flex justify-content-around align-items-center">
@@ -36,7 +38,7 @@
                                     <button type="button" class="btn btn-secondary"><a class="text-light" href="{{ route('admin.show', $post->id) }}">Details</a></button>
                                     </div>
                                     <div >
-                                    <button type="button" class="btn btn-primary"><a class="text-light" href="{{ route('admin.edit', $post->id) }}">Edit</a></button>
+                                    <button type="button" class="btn btn-secondary"><a class="text-light" href="{{ route('admin.edit', $post->id) }}">Edit</a></button>
                                     </div>
                                     
                                     <div >
@@ -44,9 +46,8 @@
                                     </div>
                                 </div>
                                 @endauth
-                            </div>
                             @endforeach
-
+                            </div>
                         </div>
 
                     </div>

@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -13,12 +14,18 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, Post $post)
     {
-        $post = Post::all();
-        return view("admin.home", [
-            "posts" => $post
-        ]);
+        $user=$post->user;
+
+        $data = [
+            'posts' => Post::orderBy("created_at", "DESC")
+                ->where("user_id", $request->user()->id)
+                ->get(),
+                "user"=>$user];
+
+        return view("admin.home", $data);
+
     }
 
     /**
@@ -28,7 +35,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("admin.create");
+        $categories = Category::all();
+
+        return view('admin.create', ["categories" => $categories]);
     }
 
     /**
@@ -48,6 +57,8 @@ class PostController extends Controller
 
         $newPost = new Post();
         $newPost-> fill($newPostData);
+        $newPost-> user_id=$request->user()->id;
+
         $newPost-> save();
 
         return redirect()-> route('admin.show',$newPost->id);
@@ -62,12 +73,16 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //$singleUser = User::find($user);
+        $user=$post->user;
+
         if(is_null($post)){
             abort(404);
         }
         
         return view('admin.show' , [
-            "post" => $post
+            "post" => $post,
+            "user" =>$user
+
         ]);
     }
 
@@ -80,9 +95,14 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        return view("admin.edit", [
-            "post" => $post
-        ]);
+        $categories = Category::all();
+
+        $data = [ 
+            "post" => $post,
+            "categories" => $categories
+        ];
+
+        return view("admin.edit", $data);
     }
 
     /**
