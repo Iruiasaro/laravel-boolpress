@@ -39,5 +39,8 @@ Route::prefix('admin')
 
         Route::get('/post/{post}/edit', "PostController@edit")->name("edit");
 
-        //Genera tutte le rotte necessarie per la crud dei posts
     });
+
+    Auth::routes();
+
+    Route::get('/home', 'HomeController@index')->name('home');
