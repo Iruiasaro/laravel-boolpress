@@ -12,7 +12,14 @@
     <li>USER: {{ $user->name }}</li>
     <li>CREATED: {{ $post->created_at }}</li>
     <li>LAST EDIT: {{ $post->updated_at }}</li>
-    <p>{{ $post->category ? $post->category->name : 'none' }}</p>
+    <p>CATEGORY: {{ $post->category ? $post->category->name : 'none' }}</p>
+    <P> TAG:  
+    @foreach($post->tags as $tag)
+        <span class="badge badge-primary">{{ $tag->name }}</span>
+    @endforeach 
+
+    </P>
+             
 
 
     <div class="col row d-flex align-items-center">

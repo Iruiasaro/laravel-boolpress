@@ -18,7 +18,7 @@
         <input type="text" name="content" id="content">
 
         <div class="form-group">
-            <label>Categoria</label>
+            <label>Category</label>
             <select name="category_id"
                 class="form-control  @error('category_id') is-invalid @enderror" >
                 <option value="">-- seleziona categoria --</option>
@@ -29,6 +29,18 @@
                             </option>
                         @endforeach
                     </select>
+
+            <div class="form-control">
+            @foreach($tags as $tag)
+            <label for=""></label>
+            <input type="checkbox" name="tags[]" value="{{$tag->id}}">
+            {{$tag->name}}
+            </label>
+                
+            @endforeach
+            </div>
+
+
                     @error('category_id')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -38,3 +50,4 @@
     {{-- <script src={{asset('js/app.js')}}></script> --}}
 </div>
 @endsection
+

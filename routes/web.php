@@ -25,6 +25,9 @@ Route::prefix('admin')
     ->middleware('auth')
     ->name("admin.")
     ->group(function () {
+        
+        Route::get('/tags', 'TagController@index')->name('tags.index');
+
         Route::get('/', 'PostController@index')->name('index');
 
         Route::post("/post", "PostController@store")->name("store");

@@ -27,13 +27,29 @@
                     </option>
                         @endforeach
                     </select>
+                    
                     @error('category_id')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
+            <label>Tags</label><br>
+
+            @foreach($tags as $tag)
+
+            <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                    <input name="tags[]" class="form-check-input" type="checkbox" value="{{ $tag->id }}" {{ $post->tags->contains($tag) ? 'checked' : '' }}>
+                    {{ $tag->name }}
+                </label>
+            </div>
+
+            @endforeach
 
     <input type="submit" value="Save">
+
+        </div>
+          
 </form>
 
 <script src={{asset('js/app.js')}}></script>
