@@ -17,17 +17,17 @@ class PostController extends Controller
 
 
         //filtro
-        function filter($posts, $filter) {
+        function filter($array, $filter) {
             $array_filtered = [];
             if($filter == "") {
-                return $posts;
+                return $array;
             }
-            foreach($posts as $post) {
+            foreach($array as $item) {
 
-                $result = strpos(strtolower($post['category']), $filter);
+                $result = strpos(strtolower($item['category']), $filter);
 
                 if($result !== false) {
-                    $array_filtered[] = $post;
+                    $array_filtered[] = $item;
                 };
 
             }
