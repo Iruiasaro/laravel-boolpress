@@ -20,7 +20,15 @@ Route::get('/post', "PostController@index")->name("post");
 
 Auth::routes();
 
-Route::prefix('admin')
+Route::prefix('api')
+    ->namespace('Api')
+    ->name("api.")
+    ->group(function () {
+        Route::get('post', 'Api\PostController@index')->name('index');
+    });
+        
+
+    Route::prefix('admin')
     ->namespace('Admin')
     ->middleware('auth')
     ->name("admin.")

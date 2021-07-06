@@ -13,15 +13,14 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-        $tags =["tag1","tag2", "tag3", "tag123"];
+        $tags = ["tag1", "tag2", "tag3", "tag123"];
 
-        foreach($tags as $tag){
+        foreach ($tags as $tag) {
 
-    $new_tag_object = new Tag();
-    $new_tag_object->name = $tag;
-    $new_tag_object->slug = Str::slug($tag);
-    $new_tag_object->save();
-
-}
-}
+            $new_tag_object = new Tag();
+            $new_tag_object->name = $tag;
+            $new_tag_object->slug = Str::slug($tag);
+            $new_tag_object->save();
+        }
+    }
 }
