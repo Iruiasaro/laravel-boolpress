@@ -7,6 +7,7 @@ use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -127,6 +128,7 @@ class PostController extends Controller
             "content"=> "required",
         ]);
 
+        Storage::put("postCovers", $formData["postCover"]);
 
         $post->update($formData);
 

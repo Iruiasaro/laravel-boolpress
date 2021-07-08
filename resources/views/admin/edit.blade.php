@@ -27,6 +27,8 @@
                     </option>
                         @endforeach
                     </select>
+
+                    <input type="file" name="postCover" accept=".jpg,.png" class="form-control-life">
                     
                     @error('category_id')
                     <div class="invalid-feedback">{{ $message }}</div>
